@@ -9,4 +9,19 @@ class SignalDetection:
         self.misses = misses
         self.falseAlarms = falseAlarms
         self.correctRejections = correctRejections
-        
+
+    def hit_rate(self):
+        return self.hits / (self.hits + self.misses) if (self. hits + self.misses) > 0 else 0
+    
+    def false_alarm_rate(self):
+        return self.falseAlarms / (self.falseAlarms + self.correctRejections) if (self.falseAlarms + self.correctRejections) > 0 else 0
+    
+    def d_prime(self):
+        hit_rate = self.hit_rate()
+        false_alarm_rate = self.false_alarm_rate()
+
+        hit_rate = min(max(hit_rate, 1e-10), 1 - 1e-10)
+        false_alarm_rate = min(max(false_alarm_rate, 1e-10) 1 1e-10)
+
+        return 
+
