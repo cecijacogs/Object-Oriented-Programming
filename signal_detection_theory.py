@@ -21,7 +21,16 @@ class SignalDetection:
         false_alarm_rate = self.false_alarm_rate()
 
         hit_rate = min(max(hit_rate, 1e-10), 1 - 1e-10)
-        false_alarm_rate = min(max(false_alarm_rate, 1e-10) 1 1e-10)
+        false_alarm_rate = min(max(hit_rate, 1e-10), 1 - 1e-10)
 
-        return 
+        return norm.ppf(hit_rate) - norm.ppf(false_alarm_rate)
+    
+    def criterion(self):
+        hit_rate = self.hit_rate()
+        false_alarm_rate = self.false_alarm_rate()
+
+        hit_rate = min(max(hit_rate, 1e-10), 1 - 1e-10)
+        false_alarm_rate = min(max(false_alarm_rate, 1e-10), 1 - 1e-10)
+
+        return -0.5 * (norm.ppf(hit_rate) + norm.ppf(false_alarm_rate))
 
