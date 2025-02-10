@@ -1,6 +1,6 @@
 import unittest 
-import numpy as np # use pip3 install numpy in terminal
-import scipy # use pip3 install scipy in terminal
+import numpy as np # use pip3 install numpy in terminal (if pip3 doesn't work, try using apt install python3-numpy)
+import scipy # use pip3 install scipy in terminal (if pip3 doesn't work, try using apt install python3-scipy)
 from scipy.stats import norm
 
 class SignalDetection: 
