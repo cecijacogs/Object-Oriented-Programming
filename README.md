@@ -1,11 +1,12 @@
 # Signal Detection
 Applying Signal Detection Theory to differentiate between a target signal and noise
 |               | Really signal | Really noise |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 | Detect signal    | hit | false alarm |
 | Detect no signal | miss | correct rejection |
 
 ![Signal Detection Theory Chart](images/signalDetectionImage.jpg)
+<br/>
 Cognitive Theory: it assumes there is a discrete continuum on which stimuli are experienced (either you do or do not experience them)
 - discriminability variable characterizes how easy it is to separate signal from noise (how much overlap?) 
 - K criterion is the decision boundary to decide if a signal is present
