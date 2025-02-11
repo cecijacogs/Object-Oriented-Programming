@@ -10,10 +10,18 @@ class SignalDetection:
         self.correctRejections = correctRejections
    
     def hit_rate(self):
-        return self.hits / (self.hits + self.misses)
+        # handle empty data
+        if self.hits + self.misses == 0:
+            return 0.5 
+        rate = self.hits / (self.hits + self.misses)
+        return min(max(rate, 1e-5), 1 - 1e-5) # avoid extreme values by clipping
     
     def false_alarm(self):
-        return self.falseAlarms / (self.falseAlarms + self.correctRejections)
+        if self.falseAlarms + self.correctRejections == 0:
+            return 0.5
+        rate = self.falseAlarms / (self.falseAlarms + self.correctRejections)
+        return min(max(rate, 1e-5), 1 - 1e-5) # avoid extreme values by clipping
+    
     def d_prime(self):
         # difference between standard deviations of signal and noise distributions as a normal distribution (signal sensitivity)
         # calculate inverse cumulative distribution function of the standard normal distribution.
