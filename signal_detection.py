@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+import unittest
 
 class SignalDetection:
     def __init__(self, hits, misses, falseAlarms, correctRejections):
@@ -36,4 +37,31 @@ class SignalDetection:
         hit_rate_sf = stats.norm.ppf(self.hit_rate())
         false_alarm_sf = stats.norm.ppf(self.false_alarm())
         return -0.5 * (hit_rate_sf + false_alarm_sf)
+    
+class TestSignalDetection(unittest.TestCase):  
+    def test_init(self):
+        hits = 15
+        misses = 5
+        falseAlarms = 15
+        correctRejections = 5
+
+        sd = SignalDetection(hits, misses, falseAlarms, correctRejections)  
+        self.assertEqual(sd.hits, hits)
+        self.assertEqual(sd.misses, misses)
+        self.assertEqual(sd.falseAlarms, falseAlarms)
+        self.assertEqual(sd.correctRejections, correctRejections)
+
+    def test_hit_rate(self):
+        hits = 15
+        misses = 5
+        falseAlarms = 15
+        correctRejections = 5
+
+        sd = SignalDetection(hits, misses, falseAlarms, correctRejections)  
+        self.assertEqual(sd.hit_rate(), 0.75)
+
+          
+# Run the tests
+if __name__ == '__main__':
+    unittest.main()
 
