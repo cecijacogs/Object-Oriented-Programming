@@ -1,7 +1,8 @@
 import numpy as np
 import scipy.stats as stats
+import matplotlib.pyplot as plt
 
-class SignalDetection(hits, misses, falseAlarms, correctRejections):
+class SignalDetection:
     def __init__(self, hits, misses, falseAlarms, correctRejections):
         self.hits = hits
         self.misses = misses
@@ -11,8 +12,8 @@ class SignalDetection(hits, misses, falseAlarms, correctRejections):
     def hit_rate(self):
         return self.hits / (self.hits + self.misses)
     
-    def false_alarm(falseAlarms, correctRejections):
-        return falseAlarms / (falseAlarms + correctRejections)
+    def false_alarm(self):
+        return self.falseAlarms / (self.falseAlarms + self.correctRejections)
     def d_prime(self):
         # difference between standard deviations of signal and noise distributions as a normal distribution (signal sensitivity)
         # calculate inverse cumulative distribution function of the standard normal distribution.
