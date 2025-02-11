@@ -2,6 +2,7 @@ import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 import unittest
+from scipy.stats import norm
 
 class SignalDetection:
     def __init__(self, hits, misses, falseAlarms, correctRejections):
@@ -40,25 +41,29 @@ class SignalDetection:
     
 class TestSignalDetection(unittest.TestCase):  
     def test_init(self):
-        hits = 15
-        misses = 5
-        falseAlarms = 15
-        correctRejections = 5
-
-        sd = SignalDetection(hits, misses, falseAlarms, correctRejections)  
-        self.assertEqual(sd.hits, hits)
-        self.assertEqual(sd.misses, misses)
-        self.assertEqual(sd.falseAlarms, falseAlarms)
-        self.assertEqual(sd.correctRejections, correctRejections)
+        sd = SignalDetection(10, 5, 8, 12)
+        self.assertEqual(sd.hits, 10)
+        self.assertEqual(sd.misses, 5)
+        self.assertEqual(sd.falseAlarms, 8)
+        self.assertEqual(sd.correctRejections, 12)
 
     def test_hit_rate(self):
-        hits = 15
-        misses = 5
-        falseAlarms = 15
-        correctRejections = 5
-
-        sd = SignalDetection(hits, misses, falseAlarms, correctRejections)  
-        self.assertEqual(sd.hit_rate(), 0.75)
+        sd = SignalDetection(10, 5, 8, 12)
+        self.assertEqual(sd.hit_rate(), 10 / 15)
+    
+    def test_false_alarm(self):
+        sd = SignalDetection(10, 5, 8, 12)
+        self.assertEqual(sd.false_alarm(), 8 / 20)
+    
+    def test_d_prime(self):
+        sd = SignalDetection(15, 5, 10, 10)
+        expected = norm.ppf(sd.hit_rate()) - norm.ppf(sd.false_alarm_rate())
+        self.assertAlmostEqual(sd.d_prime(), expected, places=6)
+    
+    def test_criterion(self):
+        sd = SignalDetection(10, 10, 5, 15)
+        expected = -0.5 * (norm.ppf(sd.hit_rate()) + norm.ppf(sd.false_alarm_rate()))
+        self.assertAlmostEqual(sd.criterion(), expected, places=6)
 
           
 # Run the tests
